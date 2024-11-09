@@ -15,6 +15,7 @@ const initDB = async () => {
     }
 }
 
+
 const dropDB = async () => {
     try {
         await pool.query(dropUserTableQuery)

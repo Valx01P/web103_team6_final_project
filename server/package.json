@@ -5,7 +5,7 @@
   "description": "Errorly server",
   "main": "server.js",
   "scripts": {
-    "initDB": "cd config && node initDB.js",
+    "initDB": "cd config && node initDB.js && node reset.js",
     "start": "npm run initDB && nodemon server.js"
   },
   "author": "",

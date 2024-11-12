@@ -1,11 +1,15 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import authRoutes from './routes/authRoutes.js';
-import userRoutes from './routes/userRoutes.js';
-import commentRoutes from './routes/commentRoutes.js';
-import dotenv from 'dotenv';
-dotenv.config();
+import authRoutes from './routes/authRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+import postRoutes from './routes/postRoutes.js'
+import commentRoutes from './routes/commentRoutes.js'
+import tagRoutes from './routes/tagRoutes.js'
+import voteRoutes from './routes/voteRoutes.js'
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 const app = express();
 
@@ -20,9 +24,14 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/auth', authRoutes);
-app.use('/comments', commentRoutes);
-// app.use('/user', userRoutes);
+app.use('/auth', authRoutes)
+app.use('/posts', postRoutes)
+app.use('/comments', commentRoutes)
+app.use('/tags', tagRoutes)
+app.use('/votes', voteRoutes)
+
+// app.use('/user', userRoutes)
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

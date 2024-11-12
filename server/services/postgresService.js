@@ -264,7 +264,7 @@ class PostgresService {
     async get_by_fields(fields) {
         const keys = Object.keys(fields)
         const values = Object.values(fields)
-        const conditions = keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')
+        const conditions = keys.map((key, index) => values[index] !== null ? `${key} = $${index + 1}` : `${key} IS NULL OR ${key} = $${index + 1}`).join(' AND ')
 
         try {
         const result = await pool.query(

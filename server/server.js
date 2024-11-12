@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import tagRoutes from './routes/tagRoutes.js'
+import voteRoutes from './routes/voteRoutes.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/auth', authRoutes)
 app.use('/posts', postRoutes)
 app.use('/tags', tagRoutes)
+app.use('/votes', voteRoutes)
 
 // app.use('/user', userRoutes)
 

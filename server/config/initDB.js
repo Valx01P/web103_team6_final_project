@@ -18,7 +18,7 @@ const initDB = async () => {
 
 const dropDB = async () => {
     try {
-        await pool.query(dropUserTableQuery)
+        await pool.query(dropDatabaseQuery)
         console.log('Database dropped')
     } catch (error) {
         console.error('Error dropping database', error)
@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS posts (
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    score INT DEFAULT 0,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )

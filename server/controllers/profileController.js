@@ -5,7 +5,8 @@ const Profile = new PostgresService("profiles")
 const profileController = {
   async getProfile(req, res) {
     try {
-      const profile = await Profile.get_by_field('user_id', req.params.user_id)
+      const user_id = req.body.user_id
+      const profile = await Profile.get_by_field("user_id", user_id)
       if (profile.length === 0) {
         return res.status(404).json({
           message: "Profile not created yet"
@@ -19,16 +20,18 @@ const profileController = {
       return res.status(400).send(error)
     }
   },
+
   async createProfile(req, res) {
     try {
-      const user_id = req.params.user_id
-      const profile_check = await Profile.get_by_field('user_id', user_id)
-      if (profile_check.length > 0) {
+      const user_id = req.jwt_user.userId
+      const profile_found = await Profile.get_by_field("user_id", user_id)
+      if (profile_found.length > 0) {
         return res.status(400).json({
           message: "Profile already created"
         })
       }
-      const profile_data = { ...req.body, user_id } 
+      const profile_data = { ...req.body, user_id: user_id }
+
       const profile = await Profile.save(profile_data)
       return res.status(201).json({
         message: "Profile successfully created",
@@ -38,9 +41,12 @@ const profileController = {
       return res.status(400).send(error)
     }
   },
+
   async updateProfile(req, res) {
     try {
-      const current_profile = await Profile.get_by_field('user_id', req.params.user_id)
+      const user_id = req.jwt_user.userId
+      const current_profile = await Profile.get_by_field("user_id", user_id)
+
       console.log(current_profile)
       if (current_profile.length === 0) {
         return res.status(404).json({

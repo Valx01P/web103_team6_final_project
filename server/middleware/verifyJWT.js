@@ -1,5 +1,11 @@
 import jwt from 'jsonwebtoken'
 
+/**
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @example returns req.jwt_user with the decoded access token containing the 'userId' and 'email'
+ */
 const verifyJWT = (req, res, next) => {
     // get the authorization header from the request
     console.log("AYOO",req.headers)

@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
-app.use('/users/:user_id/profile', profileRoutes)
+app.use('/profile', profileRoutes)
 app.use('/posts', postRoutes)
 // app.use('/comments', commentRoutes)
 // app.use('/votes', voteRoutes)

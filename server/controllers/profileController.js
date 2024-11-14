@@ -60,7 +60,7 @@ const profileController = {
       console.log(profile) 
       return res.status(200).json({
         message: "Profile successfully updated",
-        data: profile
+        profile: profile
       })
     } catch (error) {
       return res.status(400).send(error)

@@ -48,9 +48,9 @@ Node, Express, Postgres, Javascript, Passport
 - ✅ The web app implements at least one of each of the following database relationship in Postgres:
 - * ✅ One-to-one
 - * ✅ many-to-many with a join table
-- [ ] The web app implements a well-designed RESTful API that:
--  * [ ] Can respond to at least one of each type of request: GET, POST, PATCH, and DELETE.
-- * [ ] Implements proper naming conventions for routes.
+- ✅ The web app implements a well-designed RESTful API that:
+-  * ✅ Can respond to at least one of each type of request: GET, POST, PATCH, and DELETE.
+- * ✅ Implements proper naming conventions for routes.
 - ✅ The web app implements the ability to reset the database to its default state.
 - ✅ The web app implements the ability to reset the database to its default state.
 

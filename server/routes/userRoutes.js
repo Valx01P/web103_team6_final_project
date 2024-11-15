@@ -8,7 +8,7 @@ const router = express.Router()
 router.route('/')
     .get(verifyJWT, userController.getAll)
 
-// view another user
+// view any user by id
 // update your own user
 // delete your own user
 router.route('/:id')

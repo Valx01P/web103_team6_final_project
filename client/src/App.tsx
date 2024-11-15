@@ -7,6 +7,7 @@ import SessionInitializer from './auth/SessionInitializer'
 import Protected from './auth/Protected'
 import GithubSuccess from './pages/GithubSuccess'
 import GithubError from './pages/GithubError'
+import Square from './components/Square'
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/auth/github/success" element={<GithubSuccess />} />
                 <Route path="/auth/github/error" element={<GithubError />} />
+                <Route path='/square' element={<Square />} />
+
 
                 {/* Protected Routes */}
                 <Route element={<Protected />}>

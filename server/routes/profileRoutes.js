@@ -4,12 +4,12 @@ import verifyJWT from '../middleware/verifyJWT.js'
 
 const router = express.Router()
 
-// get your profile
+// view any profile by id
 // create a profile
 // update your profile
 router.route('/')
-    .get(verifyJWT, profileController.getProfile) // gets id from body
-    .post(verifyJWT, profileController.createProfile)
+    .get(verifyJWT, profileController.getProfile) // gets user id from body
+    .post(verifyJWT, profileController.createProfile) 
     .put(verifyJWT, profileController.updateProfile)
 
 export default router

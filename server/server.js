@@ -6,7 +6,7 @@ import userRoutes from './routes/userRoutes.js'
 import profileRoutes from './routes/profileRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import commentRoutes from './routes/commentRoutes.js'
-// import voteRoutes from './routes/voteRoutes.js'
+import voteRoutes from './routes/voteRoutes.js'
 // import tagRoutes from './routes/tagRoutes.js'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -30,7 +30,7 @@ app.use('/users', userRoutes)
 app.use('/profile', profileRoutes)
 app.use('/posts', postRoutes)
 app.use('/comments', commentRoutes)
-// app.use('/votes', voteRoutes)
+app.use('/votes', voteRoutes)
 // app.use('/tags', tagRoutes)
 
 

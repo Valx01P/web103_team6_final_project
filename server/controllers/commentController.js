@@ -1,78 +1,147 @@
-// FILE: controllers/commentController.js
-import Comment from '../models/Comment.js';
-import Post from '../models/Post.js';
+import PostgresService from "../services/postgresService.js"
+import verifyOwnership from "../utils/verifyOwnership.js"
 
-// Get comments for a post or comment
-export const getComments = async (req, res) => {
-    const { postId } = req.params;
+const Comment = new PostgresService("comments")
+const Post = new PostgresService("posts")
+
+const commentController = {
+  // get all comments for a post or comment depending on provided id (post_id or parent_comment_id in req.body)
+  async getAll(req, res) {
     try {
-        const comments = await Comment.find({ postId });
-        res.status(200).json(comments);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-// Create a new comment
-export const createComment = async (req, res) => {
-    const { postId } = req.params;
-    const { content } = req.body;
-    const userId = req.user.id;
-
-    try {
-        const newComment = new Comment({ postId, content, userId });
-        await newComment.save();
-        res.status(201).json(newComment);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-// Update a comment
-export const updateComment = async (req, res) => {
-    const { commentId } = req.params;
-    const { content } = req.body;
-    const userId = req.user.id;
-
-    try {
-        const comment = await Comment.findById(commentId);
-        if (comment.userId.toString() !== userId) {
-            return res.status(403).json({ message: 'You can only edit your own comments' });
+      const { post_id, parent_comment_id } = req.body
+      if (post_id) {
+        const comments = await Comment.get_by_field("post_id", post_id)
+        if (comments.length === 0) {
+          return res.status(404).json({
+            message: "No comments found for post"
+          })
         }
-
-        comment.content = content;
-        await comment.save();
-        res.status(200).json(comment);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-// Delete a comment
-export const deleteComment = async (req, res) => {
-    const { commentId } = req.params;
-    const userId = req.user.id;
-
-    try {
-        const comment = await Comment.findById(commentId);
-        if (comment.userId.toString() !== userId) {
-            return res.status(403).json({ message: 'You can only delete your own comments' });
+        return res.status(200).json({
+          message: "Comments successfully retrieved",
+          comments: comments
+        })
+      }
+      if (parent_comment_id) {
+        const comments = await Comment.get_by_field("parent_comment_id", parent_comment_id)
+        if (comments.length === 0) {
+          return res.status(404).json({
+            message: "No comments found for comment"
+          })
         }
-
-        await comment.remove();
-        res.status(200).json({ message: 'Comment deleted' });
+        return res.status(200).json({
+          message: "Comments successfully retrieved",
+          comments: comments
+        })
+      }
+      return res.status(404).json({
+        message: "Post or parent comment not found"
+      })
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      console.error("Error getting all comments:", error)
+      return res.status(500).json({
+        message: "Internal server error while retrieving comments"
+      })
     }
-};
-
-// Get comment threads
-export const getCommentThreads = async (req, res) => {
-    const { commentId } = req.params;
+  },
+  // create a comment for a post or comment depending on provided id (post_id or parent_comment_id in req.body)
+  async create(req, res) {
     try {
-        const comments = await Comment.find({ parentCommentId: commentId });
-        res.status(200).json(comments);
+      const user_id = req.jwt_user.userId
+      const { post_id, parent_comment_id, content } = req.body
+
+      // if post_id is provided, create a comment for a post
+      if (post_id) {
+        const post = await Post.get_by_id(post_id)
+        if (!post) {
+          return res.status(404).json({
+            message: "Post not found"
+          })
+        }
+        const new_comment = await Comment.save({post_id, user_id, content})
+        if (!new_comment) {
+          return res.status(500).json({
+            message: "Internal server error while creating comment"
+          })
+        }
+        return res.status(201).json({
+          message: "Comment successfully created",
+          comment: new_comment
+        })
+      }
+
+      // if parent_comment_id is provided, create a comment for a comment
+      if (parent_comment_id) {
+        const parent_comment = await Comment.get_by_id(parent_comment_id)
+        if (!parent_comment) {
+          return res.status(404).json({
+            message: "Parent comment not found"
+          })
+        }
+        const new_comment = await Comment.save({parent_comment_id, user_id, content})
+        if (!new_comment) {
+          return res.status(500).json({
+            message: "Internal server error while creating comment"
+          })
+        }
+        return res.status(201).json({
+          message: "Comment successfully created",
+          comment: new_comment
+        })
+      }
+      
+      return res.status(404).json({
+          message: "Post or parent comment not found"
+      })
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      console.error("Error creating comment:", error)
+      return res.status(500).json({
+        message: "Internal server error while creating comment"
+      })
     }
-};
+  },
+  async update(req, res) {
+    try {
+      const comment = await Comment.get_by_id(req.params.id)
+      if (!comment) {
+        return res.status(404).json({
+          message: "Comment not found"
+        })
+      }
+      verifyOwnership(req.jwt_user, comment.user_id)
+      const allowedFields = ["content"]
+      const updated_comment = await Comment.update(req.params.id, req.body, allowedFields)
+      return res.status(200).json({
+        message: "Comment successfully updated",
+        comment: updated_comment
+      })
+    } catch (error) {
+      console.error("Error updating comment:", error)
+      return res.status(500).json({
+        message: "Internal server error while updating comment"
+      })
+    }
+  },
+  async delete(req, res) {
+    try {
+      const comment = await Comment.get_by_id(req.params.id)
+      if (!comment) {
+        return res.status(404).json({
+          message: "Comment not found"
+        })
+      }
+      verifyOwnership(req.jwt_user, comment.user_id)
+      const deleted_comment = await Comment.delete(req.params.id)
+      return res.status(200).json({
+        message: "Comment successfully deleted",
+        comment: deleted_comment
+      })
+    } catch (error) {
+      console.error("Error deleting comment:", error)
+      return res.status(500).json({
+        message: "Internal server error while deleting comment"
+      })
+    }
+  }
+}
+
+export default commentController

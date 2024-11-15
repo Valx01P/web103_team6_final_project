@@ -1,14 +1,21 @@
-// FILE: routes/commentRoutes.js
-import express from 'express';
-import { getComments, createComment, updateComment, deleteComment, getCommentThreads } from '../controllers/commentController.js';
-import { authenticateUser } from '../middleware/authMiddleware.js';
+import express from 'express'
+import commentController from '../controllers/commentController.js'
+import verifyJWT from '../middleware/verifyJWT.js'
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/:postId', getComments);
-router.post('/:postId', authenticateUser, createComment);
-router.put('/:commentId', authenticateUser, updateComment);
-router.delete('/:commentId', authenticateUser, deleteComment);
-router.get('/threads/:commentId', getCommentThreads);
+// get all comments for a post or comment
+// create a comment for a post or comment
+// update your own comment
+// delete your own comment
 
-export default router;
+router.route('/')
+// provide the parent comment id or post id in the request body
+  .get(verifyJWT, commentController.getAll)
+  .post(verifyJWT, commentController.create)
+
+router.route('/:id')
+  .put(verifyJWT, commentController.update)
+  .delete(verifyJWT, commentController.delete)
+
+export default router

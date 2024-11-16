@@ -9,6 +9,8 @@ const router = express.Router()
 // create your own post
 // update your own post
 // delete your own post
+
+// include tags in the request body
 router.route('/')
     .get(verifyJWT, postController.getAllPosts)
     .post(verifyJWT, postController.createPost)

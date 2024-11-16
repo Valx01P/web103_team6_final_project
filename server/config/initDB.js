@@ -15,6 +15,18 @@ const initDB = async () => {
     }
 }
 
+const drop_something = async () => {
+    try {
+        await pool.query(
+          `DROP TABLE IF EXISTS tags CASCADE`
+        )
+        console.log('Tags table dropped')
+    }
+    catch (error) {
+        console.error('Error dropping tags table', error)
+    }
+}
+
 
 const dropDB = async () => {
     try {
@@ -99,8 +111,7 @@ CREATE TABLE IF NOT EXISTS votes (
 const createTagTableQuery = `
 CREATE TABLE IF NOT EXISTS tags (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
-    text TEXT NOT NULL
+    name VARCHAR(255) UNIQUE NOT NULL
 )
 `
 
@@ -127,3 +138,4 @@ DROP TABLE IF EXISTS post_tags CASCADE;
 
 initDB()
 // dropDB()
+// drop_something()

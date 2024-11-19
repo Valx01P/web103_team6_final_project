@@ -99,6 +99,9 @@ const authSlice = createSlice({
             localStorage.removeItem('access_token')
             state.isAuthenticated = false
         },
+        clearError(state) {
+            state.error = null
+        }
     },
     extraReducers: (builder) => {
         // Sign Up
@@ -167,5 +170,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { setAccessToken, clearAccessToken } = authSlice.actions
+export const { setAccessToken, clearAccessToken, clearError } = authSlice.actions
 export default authSlice.reducer

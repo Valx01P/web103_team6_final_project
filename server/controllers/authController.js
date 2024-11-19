@@ -35,6 +35,10 @@ const authController = {
             // get user from request
             const user = req.body
 
+            if (!user.email || !user.password || !user.first_name || !user.last_name || !user.user_name) {
+                return res.status(400).json({ message: 'Missing required fields' })
+            }
+
             // check if email already exists
             const users = await User.get_by_field('email', user.email)
             if (users.length > 0) {
@@ -110,6 +114,12 @@ const authController = {
             // username and password from login request
             const login_data = req.body
 
+            if (!login_data.email || !login_data.password) {
+                return res.status(400).json({
+                    message: 'Missing required fields'
+                })
+            }
+            
             // find user by username
             const users = await User.get_by_field('email', login_data.email)
 

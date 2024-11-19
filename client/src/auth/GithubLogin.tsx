@@ -13,7 +13,8 @@ const GithubLogin = () => {
     return (
         <button
             onClick={handleGithubLogin}
-            className="flex items-center justify-center gap-2 w-[250px] mt-5 bg-gray-800 text-white p-2 rounded-md hover:bg-gray-700"
+            type="button"
+            className="flex items-center justify-center w-[250px] bg-gray-500 text-white p-2 hover:bg-gray-700"
         >
             Continue with GitHub
         </button>

@@ -2,10 +2,13 @@
 
 const Home = () => {
     return (
-        <div className="flex-1 flex flex-col items-center justify-center align-middle">
-            <div className="">
-              <h1 className="text-3xl text-blue-600">Home</h1>
-              <p className="text-2xl font-regular">Welcome to the home page</p>
+        <div className="flex-1 flex flex-row items-center justify-center align-middle">
+            <div className="flex flex-col gap-3">
+              <h1 className="text-4xl font-medium font-regular">Welcome to Errorly!</h1>
+              <p className="text-2xl font-regular">The place to find and share coding problems!</p>
+            </div>
+            <div className="w-[350px] h-auto">
+              <img src="/logo.webp" alt="Logo" />
             </div>
         </div>
     )

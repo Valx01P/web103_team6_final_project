@@ -10,7 +10,7 @@ const Profile = () => {
             }
             {
                 user.image_url &&
-                <img src={user.image_url || "/logo.webp"} alt="avatar" className="rounded-full w-20 h-20" />
+                <img src={user.image_url || "/user.jpg"} alt="avatar" className="rounded-full w-20 h-20" />
             }
             <p className="text-2xl font-regular">Welcome to the profile page</p>
             <pre>{JSON.stringify(user, null, 2)}</pre>

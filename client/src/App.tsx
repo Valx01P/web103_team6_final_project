@@ -7,30 +7,32 @@ import SessionInitializer from './auth/SessionInitializer'
 import Protected from './auth/Protected'
 import GithubSuccess from './pages/GithubSuccess'
 import GithubError from './pages/GithubError'
-import Square from './components/Square'
+import Nav from './components/Nav'
 
 const App = () => {
   return (
     <StoreProvider>
       <SessionInitializer />
-        <main>
+        <main className='font-serif text-white bg-zinc-800 min-h-screen flex flex-col'>
             <Router>
-              <Routes>
+              <Nav />
+              <div className='flex-1 flex flex-col'>
+                <Routes>
 
-                {/* Public Routes */}
-                <Route path="/" element={<Home />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/auth/github/success" element={<GithubSuccess />} />
-                <Route path="/auth/github/error" element={<GithubError />} />
-                <Route path='/square' element={<Square />} />
+                  {/* Public Routes */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/auth/github/success" element={<GithubSuccess />} />
+                  <Route path="/auth/github/error" element={<GithubError />} />
 
 
-                {/* Protected Routes */}
-                <Route element={<Protected />}>
-                  <Route path="/profile" element={<Profile />} />
-                </Route>
+                  {/* Protected Routes */}
+                  <Route element={<Protected />}>
+                    <Route path="/profile" element={<Profile />} />
+                  </Route>
 
-              </Routes>
+                </Routes>
+              </div>
             </Router>
         </main>
       </StoreProvider>

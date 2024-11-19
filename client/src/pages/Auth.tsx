@@ -68,8 +68,8 @@ const Auth = () => {
             {isLoading && <p>Loading...</p>}
             {isFormLoading && <p>Form Loading...</p>}
             <div>
-                <button className={`p-3 ${activeForm === 'signup' ? 'bg-zinc-700' : 'bg-zinc-600'}`} onClick={() => handleFormChange('signup')}>Sign Up</button>
-                <button className={`p-3 ${activeForm === 'login' ? 'bg-zinc-700' : 'bg-zinc-600'}`} onClick={() => handleFormChange('login')}>Login</button>
+                <button className={`p-3 ${activeForm === 'signup' ? 'bg-zinc-700 text-blue-300' : 'bg-zinc-600'}`} onClick={() => handleFormChange('signup')}>Sign Up</button>
+                <button className={`p-3 ${activeForm === 'login' ? 'bg-zinc-700 text-blue-300' : 'bg-zinc-600'}`} onClick={() => handleFormChange('login')}>Login</button>
             </div>
             <div className='p-6 bg-zinc-700'>
               { activeForm === 'signup' && (

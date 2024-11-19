@@ -101,6 +101,9 @@ const authSlice = createSlice({
         },
         clearError(state) {
             state.error = null
+        },
+        setIsLoading(state, action) {
+            state.isLoading = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -170,5 +173,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { setAccessToken, clearAccessToken, clearError } = authSlice.actions
+export const { setAccessToken, clearAccessToken, clearError, setIsLoading } = authSlice.actions
 export default authSlice.reducer

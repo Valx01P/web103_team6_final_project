@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { setIsLoading } from '../store/slices/auth.slice'
 import { refreshSession } from '../store/slices/auth.slice'
 import { persistSession } from '../lib/session'
 
 const SessionInitializer = () => {
   const dispatch = useAppDispatch()
+  dispatch(setIsLoading(true))
   const session = useAppSelector((state) => state.auth.access_token)
 
   // refresh the session on app load to check if the user is still authenticated

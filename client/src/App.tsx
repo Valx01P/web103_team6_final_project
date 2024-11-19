@@ -8,6 +8,7 @@ import Protected from './auth/Protected'
 import GithubSuccess from './pages/GithubSuccess'
 import GithubError from './pages/GithubError'
 import Nav from './components/Nav'
+import Dashboard from './pages/Dashboard'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
                   {/* Protected Routes */}
                   <Route element={<Protected />}>
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                   </Route>
 
                 </Routes>

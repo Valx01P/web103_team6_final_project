@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { signUp, signIn } from '../store/slices/auth.slice'
 import { clearError } from '../store/slices/auth.slice'
@@ -7,9 +8,15 @@ import GithubLogin from '../auth/GithubLogin'
 
 const Auth = () => {
     const dispatch = useAppDispatch()
-    const { error, isLoading, isFormLoading } = useAppSelector((state) => state.auth)
+    const { error, isLoading, isFormLoading, isAuthenticated } = useAppSelector((state) => state.auth)
 
+
+    const navigate = useNavigate()
+    if (isAuthenticated) {
+      navigate('/profile')
+  }
     const [activeForm, setActiveForm] = useState('signup')
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -38,6 +45,7 @@ const Auth = () => {
             // Make sure we wrap the user data in a user object
             console.log("FIRST USER FORM", userData)
             const result = await dispatch(signUp(userData))
+            navigate('/profile')
             console.log("Signup successful:", result)
             // Handle successful signup (e.g., redirect to login or dashboard)
         } catch (error) {
@@ -54,6 +62,7 @@ const Auth = () => {
                 password: login_password
             }
             const result = await dispatch(signIn(userData))
+            navigate('/profile')
             console.log("Login successful:", result)
             // Handle successful login (e.g., redirect to dashboard)            
         } catch (error) {

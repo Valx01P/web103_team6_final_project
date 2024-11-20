@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Post, NewPostData } from "../types/db"
+import { Menu } from "lucide-react"
 
 const Dashboard = () => {
   const [closeSidebar, setCloseSidebar] = useState(false)
@@ -9,7 +10,11 @@ const Dashboard = () => {
   const [content, setContent] = useState('')
   const [tags, setTags] = useState([] as string[])
   const [layoutMenu, setLayoutMenu] = useState(false)
-  const [layoutType, setLayoutType] = useState(localStorage.getItem('layout') || 'medium')
+  const [layoutType, setLayoutType] = useState(localStorage.getItem('layout') || 'large')
+  const [search, setSearch] = useState('')
+  const [filteredPosts, setFilteredPosts] = useState([] as Post[])
+  const [filteredTags, setFilteredTags] = useState([] as string[])
+  const [filteredBy, setFilteredBy] = useState('most recent')
 
   useEffect(() => {
     try {
@@ -104,15 +109,21 @@ const Dashboard = () => {
       </div>
       {/* Main Content */}
       <div className="bg-zinc-600 min-h-full w-full">
-          { activeContent === 'posts' && ( <div className={`${layoutType === 'small' && ('grid grid-cols-4')} ${layoutType === 'large' && ('grid grid-cols-2')}`}>
-            {
-              posts.map((post: Post) => (
-                <div key={post.id} className="bg-zinc-800 p-4 m-4 rounded-lg">
-                  <h1 className="text-2xl text-white">{post.title}</h1>
-                  <p className="text-white">{post.content}</p>
-                </div>
-              ))  
-            }
+          { activeContent === 'posts' && ( <div className="h-full w-full">
+            <div className="m-4 relative max-w-fit">
+              <input type="text" placeholder="Search" className="text-black rounded-lg border border-gray-400 p-2 flex w-[300px]"/>
+              <Menu size={26} className="absolute top-2 right-4 text-zinc-700 cursor-pointer" />
+            </div>
+            <div className={`overflow-auto h-[750px] ${layoutType === 'small' && ('grid grid-cols-4')} ${layoutType === 'medium' && ('grid grid-cols-2')}`}>
+              {
+                posts.map((post: Post) => (
+                  <div key={post.id} className={`bg-zinc-800 p-4 m-4 rounded-lg ${layoutType === 'large' && ('h-[150px]')} `}>
+                    <h1 className="text-2xl text-white">{post.title}</h1>
+                    <p className="text-white">{post.content}</p>
+                  </div>
+                ))
+              }
+            </div>
           </div> ) }
           { activeContent === 'tags' && ( <div>
             <h1>tags</h1>

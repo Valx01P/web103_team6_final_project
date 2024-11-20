@@ -90,3 +90,8 @@ export interface Post {
 export interface Posts {
     posts: Post[]
 }
+
+export interface NewProfile {
+  banner_url: string
+  description: string
+}

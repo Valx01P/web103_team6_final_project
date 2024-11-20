@@ -25,7 +25,7 @@ const Nav = () => {
             <div className="flex justify-center items-center gap-4 relative">
               <img src={image_url || "/user.jpg"} onClick={handleMenuToggle} alt="User" className="cursor-pointer w-10 h-10 rounded-full bg-red-300" />
               { isMenuOpen && (
-                <div className="absolute top-12 right-4 bg-zinc-600 w-[100px] flex flex-col items-center gap-2 p-2">
+                <div className="absolute top-12 right-4 bg-zinc-900 w-[100px] flex flex-col items-center gap-2 p-2">
                   <Link to="/profile" className="hover:text-blue-300" onClick={handleMenuToggle}>Profile</Link>
                   <Link to="/dashboard" className="hover:text-blue-300" onClick={handleMenuToggle}>Dashboard</Link>
                   <button className="hover:text-blue-300" onClick={() => {dispatch(signOut()); handleMenuToggle()}}>Sign Out</button>

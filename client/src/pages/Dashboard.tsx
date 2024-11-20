@@ -11,10 +11,10 @@ const Dashboard = () => {
   const [tags, setTags] = useState([] as string[])
   const [layoutMenu, setLayoutMenu] = useState(false)
   const [layoutType, setLayoutType] = useState(localStorage.getItem('layout') || 'large')
-  const [search, setSearch] = useState('')
-  const [filteredPosts, setFilteredPosts] = useState([] as Post[])
-  const [filteredTags, setFilteredTags] = useState([] as string[])
-  const [filteredBy, setFilteredBy] = useState('most recent')
+  // const [search, setSearch] = useState('')
+  // const [filteredPosts, setFilteredPosts] = useState([] as Post[])
+  // const [filteredTags, setFilteredTags] = useState([] as string[])
+  // const [filteredBy, setFilteredBy] = useState('most recent')
 
   useEffect(() => {
     try {
@@ -110,9 +110,9 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="bg-zinc-600 min-h-full w-full">
           { activeContent === 'posts' && ( <div className="h-full w-full">
-            <div className="m-4 relative max-w-fit">
+            <div className="p-4 relative max-w-fit">
               <input type="text" placeholder="Search" className="text-black rounded-lg border border-gray-400 p-2 flex w-[300px]"/>
-              <Menu size={26} className="absolute top-2 right-4 text-zinc-700 cursor-pointer" />
+              <Menu size={26} className="absolute top-6 right-7 text-zinc-700 cursor-pointer" />
             </div>
             <div className={`overflow-auto h-[750px] ${layoutType === 'small' && ('grid grid-cols-4')} ${layoutType === 'medium' && ('grid grid-cols-2')}`}>
               {

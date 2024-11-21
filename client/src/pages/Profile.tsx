@@ -82,7 +82,7 @@ const Profile = () => {
                     />
                     <div>
                         <p className="text-2xl font-medium">{user.first_name} {user.last_name}</p>
-                        <p className="text-gray-600">@{user.user_name}</p>
+                        <p className="text-gray-300">@{user.user_name}</p>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@ const Profile = () => {
                             className="w-full h-48 object-cover rounded-lg mb-4"
                         />
                     )}
-                    <p className="text-gray-700 whitespace-pre-wrap">{profile.description}</p>
+                    <p className="text-gray-300 whitespace-pre-wrap">{profile.description}</p>
                     <button 
                         onClick={() => setIsEditing(true)}
                         className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"

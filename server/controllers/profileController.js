@@ -5,7 +5,7 @@ const Profile = new PostgresService("profiles")
 const profileController = {
   async getProfile(req, res) {
     try {
-      const user_id = req.body.user_id
+      const user_id = req.jwt_user.userId
       const profile = await Profile.get_by_field("user_id", user_id)
       if (profile.length === 0) {
         return res.status(404).json({

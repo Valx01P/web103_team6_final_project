@@ -16,6 +16,7 @@ dotenv.config({ path: '../.env' })
  * @method save(data) - Save a new record to the table
  * @method update(id, data) - Update a record by ID
  * @method delete(id) - Delete a record by ID
+ * @method delete_by_field(field, value)
  * @method get_by_field(field, value) - Get records by a specific field and value
  * @method get_by_fields(fields) - Get records by multiple fields
  */
@@ -277,6 +278,20 @@ class PostgresService {
         throw error
         }
     }
+
+    async delete_by_field(field, value) {
+      try {
+          const result = await pool.query(
+              `DELETE FROM ${this.table} WHERE ${field} = $1 RETURNING *`,
+              [value]
+          )
+          return result.rows
+      } catch (error) {
+          console.error('Error deleting data by field:', error)
+          throw error
+      }
+    }
+  
 }
 
 export default PostgresService

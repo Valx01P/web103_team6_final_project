@@ -5,8 +5,9 @@ CodePath WEB103 Final Project
 Designed and developed by: Pablo, Mohammad, Victor
 
 🔗 Link to deployed app:
+[Errorly Deployed Url](https://errorly-frontend.vercel.app/)
 
-## About
+## Abouthow 
 
 Errorly is a programming question posting platform where users can interact with each other and posted problems.
 These problems can be made by any user, and are meant to show users unique problems to practice.
@@ -57,42 +58,42 @@ Node, Express, Postgres, Javascript, Passport
 #### Frontend Features 
 
 - ✅ The web app implements at least one redirection.
-- [ ] The web app implements at least one interaction that the user can initiate and complete on the same page without navigating to a new page.
-- [ ] The web app uses dynamic frontend routes created with React Router.
-- [ ] The web app uses hierarchically designed React components:
+- ✅ The web app implements at least one interaction that the user can initiate and complete on the same page without navigating to a new page.
+- ✅ The web app uses dynamic frontend routes created with React Router.
+- ✅ The web app uses hierarchically designed React components:
 
-- * [ ] Components are broken down into categories, including page and component types.
-- * [ ] Corresponding container components and presenter components as appropriate.
+- * ✅ Components are broken down into categories, including page and component types.
+- * ✅ Corresponding container components and presenter components as appropriate.
 
 
 #### Custom Features (MUST complete TWO)
 
-- [ ] The web app gracefully handles errors.
+- ✅ The web app gracefully handles errors.
 - ✅ The web app includes a one-to-one database relationship.
-- [ ] The web app includes a slide-out pane or modal as appropriate for your use case.
+- ✅ The web app includes a slide-out pane or modal as appropriate for your use case.
 - ✅ The web app includes a unique field within the join table.
-- [ ] The web app includes a custom non-RESTful route with corresponding controller actions.
-- [ ] The web app allows filtering and/or sorting as appropriate for your use case.
-- [ ] Data is automatically generated in response to a certain event or user action. Examples include generating a default inventory for a new user starting a game or creating a starter set of tasks for a user creating a new task app account.
-- [ ] Data submitted via a POST or PATCH request is validated before the database is updated.
+- ✅ The web app includes a custom non-RESTful route with corresponding controller actions.
+- ✅ The web app allows filtering and/or sorting as appropriate for your use case.
+- ✅ Data is automatically generated in response to a certain event or user action. Examples include generating a default inventory for a new user starting a game or creating a starter set of tasks for a user creating a new task app account.
+- ✅ Data submitted via a POST or PATCH request is validated before the database is updated.
 
 ### Additional Features
 
 ### Voting system for posted problems and comments
 
-- [ ] Users can upvote and downvote posted problems and users' comments for those problems as a way of giving feedback to the user
+- ✅ Users can upvote and downvote posted problems and users' comments for those problems as a way of giving feedback to the user
 
-[gif goes here]
+![Voting GIF](https://i.imgur.com/VLC7Ymj.gif)
 
 ### Question filtering based on upvotes, comments, newest, oldest
 
-- [ ] The user can filter programming questions by their upvotes, downvotes, comments, and by how recently they have been posted
+- ✅ The user can filter programming questions by their upvotes, downvotes, comments, and by how recently they have been posted
 
-[gif goes here]
+![Filtering GIF](https://i.imgur.com/IV1utHr.gif)
 
 ### Markdown Editor for writing programming problems
 
-- [ ] A user making a programming problem can use a Markdown Editor to create and style their problems
+- [] A user making a programming problem can use a Markdown Editor to create and style their problems
 
 [gif goes here]
 
@@ -100,7 +101,7 @@ Node, Express, Postgres, Javascript, Passport
 
 - ✅ The user can login and signup up through our app, Errorly, or via Github
 
-[gif goes here]
+![SignUp/Login + Github OAuth](https://i.imgur.com/oqPgdpK.gif)
 
 
 ## Installation Instructions

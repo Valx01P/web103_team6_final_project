@@ -7,6 +7,12 @@ Designed and developed by: Pablo, Mohammad, Victor
 🔗 Link to deployed app:
 [Errorly Deployed Url](https://errorly-frontend.vercel.app/)
 
+🔗 Frontend Repo used for Deployment:
+[Errorly Frontend](https://github.com/Valx01P/ErrorlyFrontend)
+
+🔗 Backend Repo used for Deployment:
+[Errorly API](https://github.com/Valx01P/ErrorlyAPI)
+
 ## About
 
 Errorly is a programming question posting platform where users can interact with each other and posted problems.

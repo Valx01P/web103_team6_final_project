@@ -7,7 +7,7 @@ Designed and developed by: Pablo, Mohammad, Victor
 🔗 Link to deployed app:
 [Errorly Deployed Url](https://errorly-frontend.vercel.app/)
 
-## Abouthow 
+## About
 
 Errorly is a programming question posting platform where users can interact with each other and posted problems.
 These problems can be made by any user, and are meant to show users unique problems to practice.
